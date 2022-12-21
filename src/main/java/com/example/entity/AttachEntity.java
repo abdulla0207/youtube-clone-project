@@ -23,5 +23,5 @@ public class AttachEntity {
     @Column
     private String path;
     @Column
-    private String duration;
+    private Integer duration;
 }
