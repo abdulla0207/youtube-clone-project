@@ -3,13 +3,13 @@ package com.example.dto;
 import com.example.entity.ProfileEntity;
 import com.example.enums.ChannelStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChannelDTO {
     private String id;
     private String name;
