@@ -1,14 +1,15 @@
 package com.example.dto;
 
 import com.example.enums.ProfileRole;
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString
 @Setter
 public class JwtDTO {
-    private String username;
+    private String id;
+    private String email;
     private ProfileRole role;
 }
