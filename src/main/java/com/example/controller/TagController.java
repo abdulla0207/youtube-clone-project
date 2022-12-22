@@ -3,12 +3,14 @@ package com.example.controller;
 import com.example.dto.TagDTO;
 import com.example.service.TagService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/tag")
 public class TagController {
@@ -17,6 +19,7 @@ public class TagController {
 
     @PostMapping("/admin/create")
     public ResponseEntity<TagDTO> create(@Valid @RequestBody TagDTO tagDTO) {
+        log.warn("createTag : {} " + tagDTO);
         TagDTO result = tagService.create(tagDTO);
         return ResponseEntity.ok(result);
     }
@@ -28,6 +31,7 @@ public class TagController {
 
     @DeleteMapping("/admin/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        log.warn(" DELETE TAG ");
         String delete = tagService.delete(id);
         return ResponseEntity.ok(delete);
     }
@@ -35,6 +39,7 @@ public class TagController {
     @PutMapping("/admin/update/{id}")
     public ResponseEntity<?> updater(@Valid @PathVariable("id") Integer id,
                                      @RequestBody TagDTO tagDTO) {
+        log.warn("UPDATE : {} " + tagDTO);
         TagDTO result = tagService.update(id, tagDTO);
         return ResponseEntity.ok(result);
     }
