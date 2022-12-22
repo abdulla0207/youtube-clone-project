@@ -16,7 +16,9 @@ import com.example.util.JwtTokenUtil;
 import com.example.util.MD5Util;
 import com.example.util.SpringSecurityUtil;
 import io.jsonwebtoken.JwtException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,7 +29,14 @@ public class AuthService {
     private ProfileRepository profileRepository;
 
     @Autowired
-    ResourceBundleService resourceService;
+    private ResourceBundleService resourceService;
+
+
+    @Autowired
+    private EmailHistoryService emailHistoryService;
+
+    @Value("muhammadsodiqnabijonov2502@gmail.com")
+    private String fromAccount;
 
 
     public AuthResponseDTO login(AuthLoginDTO dto, Language language) {
@@ -82,7 +91,8 @@ public class AuthService {
         String link = String.format("<a href=\"http://localhost:8080/authorization/verification/email/%s\"> Click there </a>",
                 JwtTokenUtil.encode2(SpringSecurityUtil.getCurrentUserId()));
         sb.append(link);
-        emailService.sendEmailMime(dto.getEmail(), "Complete registration", sb.toString());
+
+        emailHistoryService.sendEmailMime(fromAccount,dto.getEmail(), "Complete registration", sb.toString());
 
 
         if (entity.getId() == 0) {
