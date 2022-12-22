@@ -6,10 +6,7 @@ import com.example.repository.EmailHistoryRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -61,21 +58,13 @@ public class EmailHistoryService {
         return emailHistoryDTOList;
     }
 
-    private EmailHistoryDTO toDTO(EmailHistoryEntity emailHistoryEntity) {
-        EmailHistoryDTO emailDTO = new EmailHistoryDTO();
-        emailDTO.setEmail(emailHistoryEntity.getEmail());
-        emailDTO.setMessage(emailHistoryEntity.getMessage());
-        emailDTO.setTitle(emailHistoryEntity.getTitle());
-        emailDTO.setCreatedDate(emailHistoryEntity.getCreatedDate());
-        emailDTO.setId(emailHistoryEntity.getId());
-        return emailDTO;
-    }
-
-    public List<EmailHistoryDTO> getEmailsByDate(String date) {
+    public Page<EmailHistoryDTO> getEmailsByDate(String date, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, timeFormatter);
 
-        List<EmailHistoryEntity> emailHistoryEntityList = emailHistoryRepository.getEmailByDate(localDate);
+        Page<EmailHistoryEntity> emailHistoryEntityPage = emailHistoryRepository.getEmailByDate(localDate, pageable);
+        List<EmailHistoryEntity> emailHistoryEntityList = emailHistoryEntityPage.getContent();
 
         List<EmailHistoryDTO> dtoList = new ArrayList<>();
 
@@ -84,11 +73,22 @@ public class EmailHistoryService {
             dtoList.add(emailHistoryDTO);
         });
 
-        return dtoList;
+        return new PageImpl<>(dtoList, pageable, emailHistoryEntityPage.getTotalElements());
     }
 
     public Page<EmailHistoryDTO> getEmailHistoryPagination(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
+
+        return getEmailHistoryDTOS(pageable);
+    }
+
+    public Page<EmailHistoryDTO> getEmailHistoryPaginationOrderByEmailAndDate(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("email").and(Sort.by("created_date")));
+
+        return getEmailHistoryDTOS(pageable);
+    }
+
+    private Page<EmailHistoryDTO> getEmailHistoryDTOS(Pageable pageable) {
         Page<EmailHistoryEntity> emailHistoryEntityPage = emailHistoryRepository.findAll(pageable);
 
         List<EmailHistoryEntity> emailHistoryEntityList = emailHistoryEntityPage.getContent();
@@ -100,5 +100,15 @@ public class EmailHistoryService {
         });
 
         return new PageImpl<>(dtoList, pageable, emailHistoryEntityPage.getTotalElements());
+    }
+
+    private EmailHistoryDTO toDTO(EmailHistoryEntity emailHistoryEntity) {
+        EmailHistoryDTO emailDTO = new EmailHistoryDTO();
+        emailDTO.setEmail(emailHistoryEntity.getEmail());
+        emailDTO.setMessage(emailHistoryEntity.getMessage());
+        emailDTO.setTitle(emailHistoryEntity.getTitle());
+        emailDTO.setCreatedDate(emailHistoryEntity.getCreatedDate());
+        emailDTO.setId(emailHistoryEntity.getId());
+        return emailDTO;
     }
 }
