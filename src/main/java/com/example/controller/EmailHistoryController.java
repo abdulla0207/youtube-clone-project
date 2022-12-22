@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +29,23 @@ public class EmailHistoryController {
     }
 
     @GetMapping("/date")
-    public ResponseEntity<?> getEmailsByDate(HttpServletRequest request, @RequestParam String date){
-        List<EmailHistoryDTO> response = emailHistoryService.getEmailsByDate(date);
+    public ResponseEntity<?> getEmailsByDate(HttpServletRequest request, @RequestParam String date, @RequestParam Integer page, @RequestParam Integer size){
+        Page<EmailHistoryDTO> response = emailHistoryService.getEmailsByDate(date, page, size);
 
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/pagination")
     public ResponseEntity<?> getEmailHistoryPagination(HttpServletRequest request, @RequestParam Integer page, @RequestParam Integer size){
         Page<EmailHistoryDTO> response = emailHistoryService.getEmailHistoryPagination(page, size);
 
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/sortByEmailAndDate")
+    public ResponseEntity<?> getEmailHistoryPaginationOrderByEmailAndDate(HttpServletRequest request, @RequestParam Integer page, @RequestParam Integer size){
+        Page<EmailHistoryDTO> response = emailHistoryService.getEmailHistoryPaginationOrderByEmailAndDate(page, size);
         return ResponseEntity.ok(response);
     }
 }
