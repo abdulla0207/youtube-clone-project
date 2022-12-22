@@ -37,6 +37,9 @@ public class AttachService {
     private String attachFolder;
     @Value("${attach.open.url}")
     private String attachOpenUrl;
+
+    @Value("${server.domain.name}")
+    private String domainName;
     @Autowired
     private AttachRepository attachRepository;
 
@@ -185,5 +188,10 @@ public class AttachService {
         int lastIndex = fileName.lastIndexOf(".");
         return fileName.substring(lastIndex + 1);
     }
+
+    public String toOpenUrl(String id) {
+        return domainName + "attach/open/" + id;
+    }
+
 
 }

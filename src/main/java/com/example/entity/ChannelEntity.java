@@ -44,7 +44,7 @@ public class ChannelEntity {
     @Column(name = "profile_id")
     private Integer profileId;
     @JoinColumn(name = "profile_id", insertable = false, updatable = false)
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
 }

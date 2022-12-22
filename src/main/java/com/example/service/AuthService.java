@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -34,6 +35,9 @@ public class AuthService {
 
     @Autowired
     private EmailHistoryService emailHistoryService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @Value("muhammadsodiqnabijonov2502@gmail.com")
     private String fromAccount;
@@ -110,7 +114,7 @@ public class AuthService {
             return "Verification failed";
         }
 
-        ProfileEntity exists = profileService.get(id);
+        ProfileEntity exists = profileService.getById(String.valueOf(id));
         if (!exists.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
             return "Verification failed";
         }

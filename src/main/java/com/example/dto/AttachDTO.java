@@ -6,12 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AttachDTO {
     private String id;
@@ -22,4 +24,8 @@ public class AttachDTO {
     private Integer duration;
     private String url;
     private LocalDateTime createdDate;
+
+    public AttachDTO(String url) {
+        this.url = url;
+    }
 }

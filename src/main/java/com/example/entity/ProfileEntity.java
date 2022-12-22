@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -45,4 +47,16 @@ public class ProfileEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private ProfileStatus status;
+
+    @Column(name = "prt_Id")
+    private Integer prtId;
+
+    @Column
+    private Boolean visible;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 }
