@@ -23,7 +23,7 @@ public class EmailHistoryDTO {
     @Size(min = 5,message = "title is required")
     private String title;
     @NotNull
-    @Size(min = 5,message = "messsage is required")
+    @Size(min = 5,message = "message is required")
     private String message;
     @Email
     private String email;
