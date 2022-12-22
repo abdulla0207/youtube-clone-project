@@ -19,7 +19,7 @@ public class AuthService {
 
 
     public String registration(AuthRegistrationDTO dto) {
-        Optional<ProfileEntity> optional = profileRepository.findByUsername(dto.getSurname());
+        Optional<ProfileEntity> optional = profileRepository.findByEmail(dto.getSurname());
 
         if (optional.isPresent()) {
             ProfileEntity profile = optional.get();
