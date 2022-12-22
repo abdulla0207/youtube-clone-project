@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,11 +22,9 @@ public class EmailHistoryEntity {
     @Column
     private String message;
 
-    @Column(name = "to_email")////?!
-    private String toEmail;
+    @Column
+    private String email;
 
     @Column(name = "created_date")
-    private LocalDate localDate = LocalDate.now();
-
-
+    private LocalDateTime localDateTime = LocalDateTime.now();
 }

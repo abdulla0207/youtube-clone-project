@@ -1,15 +1,12 @@
 package com.example.dto;
 
-import com.example.entity.ProfileEntity;
 import com.example.enums.ChannelStatus;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChannelDTO {
     private String id;
     private String name;
@@ -17,7 +14,7 @@ public class ChannelDTO {
     private String photo;      /// type ????
 
     private ChannelStatus status;
-    private String banner;/// type ????
+    private AttachDTO banner;/// type ????
 
     private Integer profileId;
 
