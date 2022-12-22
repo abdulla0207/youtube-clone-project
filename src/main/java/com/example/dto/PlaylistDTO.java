@@ -25,7 +25,7 @@ public class PlaylistDTO {
     private PlaylistStatus status;
 
     private Integer channelId;
-    ////
-    @Column(name = "order_num")
+    private ChannelDTO channel;
+
     private Integer orderNum;
 }

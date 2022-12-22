@@ -1,27 +1,30 @@
 package com.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmailHistoryDTO {
-
     private Integer id;
-    @NotBlank
-    @Size(min = 5,max = 20,message = "title is required")
+    private LocalDateTime createdDate;
+    @NotNull
+    @Size(min = 5,message = "title is required")
     private String title;
-    @NotBlank
+    @NotNull
     @Size(min = 5,message = "messsage is required")
     private String message;
-    @NotBlank
-    private String toEmail;
+    @Email
+    private String email;
 }

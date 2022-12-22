@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TagDTO {
     private Integer id;
-    @Size(min = 5,max = 20,message = "Name is required")
+    @Size(min = 5,message = "Name is required")
     private String name;
     private LocalDateTime createdDate;
 }

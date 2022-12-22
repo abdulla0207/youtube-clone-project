@@ -2,10 +2,14 @@ package com.example.entity;
 
 import com.example.enums.ChannelStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jdk.jfr.Enabled;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -21,18 +25,25 @@ public class ChannelEntity {
     @Column
     private String description;
 
-    @Column
-    private String photo;/// type ????
+    @Column(name = "photo_id")
+    private String photoId;
+    @JoinColumn(name = "photo_id", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    private AttachEntity photo;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private ChannelStatus status;
 
-    @Column
-    private String banner;/// type ????
+    @Column(name = "banner_id")
+    private String bannerId;
+    @JoinColumn(name = "banner_id", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    private AttachEntity banner;
 
     @Column(name = "profile_id")
     private Integer profileId;
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     @OneToOne(fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
