@@ -26,5 +26,5 @@ public class EmailHistoryEntity {
     private String email;
 
     @Column(name = "created_date")
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private LocalDateTime createdDate = LocalDateTime.now();
 }
