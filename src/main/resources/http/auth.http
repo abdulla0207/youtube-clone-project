@@ -1,0 +1,42 @@
+### Admin token
+Authorization: Bearer
+
+
+### Login Admin
+GET http://localhost:8080/authorization/login
+Content-Type: application/json
+Accept-Language: RU
+
+{
+  "email": "youtubeUser@gmail.com",
+  "password": "7777"
+}
+
+### Login profile
+GET http://localhost:8080/authorization/login
+Content-Type: application/json
+Accept-Language: RU
+
+{
+  "email": "yangi email yozish kerak",
+  "password": "888888"
+}
+
+
+
+### Register
+POST http://localhost:8080/authorization/register
+Content-Type: application/json
+
+{
+  "name": "Muhammadsodiq",
+  "surname": "Nabijonov",
+  "password": "3433",
+  "email": "muhammadsodiq@gmail.com"
+}
+
+
+
+
+### Create Admin init
+GET http://localhost:8080/init/data

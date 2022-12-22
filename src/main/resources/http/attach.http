@@ -1,0 +1,32 @@
+### sssss ni orniga bitta rasm yuklap yuborila
+### upload file
+POST http://localhost:8080/attach/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="SSSSSSSSSSSSS"
+
+< C:\Users\user\Pictures\ssssss.jpg
+
+### Get File
+### uuid orniga databasedan uuid olip copy paste qilish kerak
+GET http://localhost:8080/attach/load/4b397841-e976-4484-8378-6296f5651e9b
+
+### Get General
+### uuid orniga databasedan uuid olip copy paste qilish kerak
+GET http://localhost:8080/attach/open/4b397841-e976-4484-8378-6296f5651e9b
+
+### Download By id with origin name
+### uuid orniga databasedan uuid olip copy paste qilish kerak
+GET http://localhost:8080/attach/download/9580112b-a2cd-4aa8-90e5-ad2348c707f0
+
+
+### Get List By Pagination
+### yangi token qoyish kerak Bearer yoniga
+GET http://localhost:8080/attach/pagination?page=1&size=2
+Authorization: Bearer
+
+### Delete by id
+### yangi token qoyish kerak Bearer yoniga
+DELETE http://localhost:8080/attach/delete/d6fc561e-12e4-41af-a157-3334f23f1f11
+Authorization: Bearer

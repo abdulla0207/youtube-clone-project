@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,7 +25,7 @@ public class AttachEntity {
     private String originName ;
 
     @Column
-    private Integer size;
+    private Long size;
 
     @Column
     private String type;
@@ -31,5 +34,13 @@ public class AttachEntity {
     private String path;
 
     @Column
+    private String extension;
+
+    @Column
     private Integer duration;
+    @Column
+    private String url;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
 }
