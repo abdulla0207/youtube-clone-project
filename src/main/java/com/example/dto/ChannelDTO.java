@@ -15,10 +15,10 @@ import lombok.*;
 public class ChannelDTO {
     private String id;
     @NotBlank
-    @Size(min = 5,max = 20,message = "Name is required")
+    @Size(min = 5, max = 20, message = "Name is required")
     private String name;
     @NotBlank
-    @Size(min = 5,message = "description is required")
+    @Size(min = 5, message = "description is required")
     private String description;
 
     private String photo;      /// type ????

@@ -1,9 +1,9 @@
 package com.example.service;
 
-import com.example.dto.CategoryDTO;
-import com.example.entity.CategoryEntity;
+import com.example.dto.TagDTO;
+import com.example.entity.TagEntity;
 import com.example.exceptions.AppBadRequestException;
-import com.example.repository.CategoryRepository;
+import com.example.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,26 +12,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryService {
+public class TagService {
     @Autowired
-    private CategoryRepository categoryRepository;
+    private TagRepository tagRepository;
 
-    public CategoryDTO create(CategoryDTO dto) {
-        CategoryEntity entity = new CategoryEntity();
+    public TagDTO create(TagDTO dto) {
+        TagEntity entity = new TagEntity();
         entity.setName(dto.getName());
 
-        categoryRepository.save(entity);
+        tagRepository.save(entity);
         ////set security for admin id
         entity.setId(dto.getId());
         return dto;
     }
 
-    public List<CategoryDTO> getList() {
-        Iterable<CategoryEntity> entities = categoryRepository.findAll();
+    public List<TagDTO> getList() {
+        Iterable<TagEntity> entities = tagRepository.findAll();
 
-        List<CategoryDTO> dtos = new ArrayList<>();
+        List<TagDTO> dtos = new ArrayList<>();
         entities.forEach(category -> {
-            CategoryDTO dto = new CategoryDTO();
+            TagDTO dto = new TagDTO();
             dto.setId(category.getId());
             dto.setName(category.getName());
             dto.setCreatedDate(category.getCreatedDate());
@@ -41,20 +41,20 @@ public class CategoryService {
     }
 
     public String delete(Integer id) {
-        Optional<CategoryEntity> byId = categoryRepository.findById(id);
+        Optional<TagEntity> byId = tagRepository.findById(id);
         if (byId.isEmpty()) {
             throw new AppBadRequestException("Categogry Not Found");
         }
-        categoryRepository.deteleCategory(id);
+        tagRepository.deteleTag(id);
         return "Succcesfully deleted";
     }
 
-    public CategoryDTO update(Integer id, CategoryDTO dto) {
-        Optional<CategoryEntity> byId = categoryRepository.findById(id);
+    public TagDTO update(Integer id, TagDTO dto) {
+        Optional<TagEntity> byId = tagRepository.findById(id);
         if (byId.isEmpty()) {
             throw new AppBadRequestException("Categogry Not Found");
         }
-        categoryRepository.update(dto.getName(), id);
+        tagRepository.update(dto.getName(), id);
         dto.setId(id);
         return dto;
     }
