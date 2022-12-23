@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Repository
-public interface ChannelRepository extends JpaRepository<ChannelEntity, String> {
 
-    void createChannel(ChannelEntity channelEntity);
+public interface ChannelRepository extends JpaRepository<ChannelEntity, String> {
 
     @Transactional
     @Modifying

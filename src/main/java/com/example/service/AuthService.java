@@ -124,5 +124,4 @@ public class AuthService {
 
         return "Verification success";
     }
-
 }

@@ -38,8 +38,8 @@ public class AttachService {
     @Value("${attach.open.url}")
     private String attachOpenUrl;
 
-    @Value("${server.domain.name}")
-    private String domainName;
+//    @Value("${server.domain.name}")
+    private String domainName = "something";
     @Autowired
     private AttachRepository attachRepository;
 

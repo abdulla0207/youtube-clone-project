@@ -25,7 +25,7 @@ public class ChannelService {
 
         ChannelEntity channelEntity = getEntity(channelDTO);
 
-        channelRepository.createChannel(channelEntity);
+        channelRepository.save(channelEntity);
         channelDTO.setId(channelEntity.getId());
         return channelDTO;
     }
