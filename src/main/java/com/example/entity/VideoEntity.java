@@ -47,6 +47,8 @@ public class VideoEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
+
+
     @Column(name = "published_date")
     private LocalDateTime publishYear;
 
