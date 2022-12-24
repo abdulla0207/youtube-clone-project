@@ -1,7 +1,8 @@
 package com.example.dto;
 
-import com.example.entity.TagEntity;
+import com.example.entity.ProfileEntity;
 import com.example.entity.VideoTagEntity;
+import com.example.enums.VideoLikeType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,14 +13,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VideoTagDTO {
+public class VideoLikeDTO {
 
     private Integer id;
-    @NotBlank
-    @Size(message = "VIDEO required")
-    private String videoId;
-    @NotBlank
-    @Size(message = "TAG required")
-    private Integer tagId;
 
+    @NotBlank
+    @Size(message = "Profile REQUIRED")
+    private Integer profileId;
+
+
+    @NotBlank
+    @Size(message = "VIDEO REQUIRED")
+    private String videoId;
+
+    private VideoLikeType type;
 }
