@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import com.example.enums.VideoStatus;
+import com.example.enums.VideoType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,25 +48,24 @@ public class VideoEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
-
-
     @Column(name = "published_date")
     private LocalDateTime publishYear;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private VideoStatus status;
 
     @Column(name = "view_count")
-    private Integer viewCount;
+    private Integer viewCount = 0;
 
     @Column(name = "like_count")
-    private Integer likeCount;
+    private Integer likeCount = 0;
 
     @Column(name = "dislike_count")
-    private Integer dislikeCount;
+    private Integer dislikeCount = 0;
 
     @Column(name = "shared_count")
-    private Integer sharedCount;
+    private Integer sharedCount = 0;
 
     @Column(name = "channel_id")
     private String channelId;
@@ -73,5 +73,7 @@ public class VideoEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private ChannelEntity channel;
 
-
+    @Column
+    @Enumerated(EnumType.STRING)
+    private VideoType type;
 }

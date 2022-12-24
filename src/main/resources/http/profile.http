@@ -1,0 +1,13 @@
+### Create Profile By Admin
+POST http://localhost:8080/profile/admin/create
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzEwMjE5MjQsImlkIjozLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzExMDgzMjQsImlzcyI6Ik11aGFtbWFkc29kaXEifQ.R4fkqp8fXCgufwCVi1nmXL1diH8UJVV6Ph6de_GOszUH5GZJKxjJWZDAlWORi_F2c4ZwMueYcL0CkSoNzCLuiw
+
+
+{
+  "name": "Sherbeeeeeek",
+  "surname": "Tursunov",
+  "password": "9999",
+  "role": "ROLE_ADMIN",
+  "email": "sherbektursunxon@gmail.com"
+}

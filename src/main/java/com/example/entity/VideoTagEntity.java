@@ -23,7 +23,7 @@ public class VideoTagEntity {
     private String videoId;
     @JoinColumn(name = "video_id", insertable = false, updatable = false)
     @OneToOne(fetch = FetchType.LAZY)
-    private VideoTagEntity video;
+    private VideoEntity video;
 
     @Column(name = "tag_id")
     private Integer tagId;
@@ -33,5 +33,4 @@ public class VideoTagEntity {
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
-
 }

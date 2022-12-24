@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,14 +26,16 @@ public class VideoLikeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
-    @Column(name = "video_id")
+    @Column(name = "video_tag_id")
     private String videoId;
-    @JoinColumn(name = "video_id", insertable = false, updatable = false)
+    @JoinColumn(name = "video_tag_id", insertable = false, updatable = false)
     @OneToOne(fetch = FetchType.LAZY)
-    private VideoTagEntity video;
+    private VideoEntity video;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private VideoLikeType type;
 
-
+    @Column
+    private LocalDateTime createdDate = LocalDateTime.now();
 }

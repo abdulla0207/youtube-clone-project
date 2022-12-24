@@ -3,6 +3,7 @@ package com.example.dto;
 import com.example.enums.ProfileRole;
 import com.example.enums.ProfileStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class ProfileDTO {
     @NotBlank @Size(min = 5,max = 20,message = "Surname is required")
     private String surname;
     @NotBlank @Size(min = 4,max = 20,message = "Email is required")
+    @Email
     private String email;
     @NotBlank @Size(min = 4,max = 50,message = "Password must contain 4 characters")
     private String password;
