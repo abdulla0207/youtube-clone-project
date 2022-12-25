@@ -1,6 +1,7 @@
 package com.example.repository;
 
 
+import com.example.dto.AttachDTO;
 import com.example.entity.ChannelEntity;
 import com.example.service.ChannelService;
 import jakarta.transaction.Transactional;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
 
-public interface ChannelRepository extends JpaRepository<ChannelEntity, String> {
+
+public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
 
     @Transactional
     @Modifying
@@ -28,4 +31,6 @@ public interface ChannelRepository extends JpaRepository<ChannelEntity, String> 
     int updateChannelPhoto(String id, String channelId);
 
 
+    @Query("update ChannelEntity set bannerId = ?1 where id = ?2")
+    int updateChannelBanner(AttachDTO banner, String channelId);
 }

@@ -4,7 +4,9 @@ import com.example.dto.AttachDTO;
 import com.example.dto.ChannelDTO;
 import com.example.entity.AttachEntity;
 import com.example.entity.ChannelEntity;
+import com.example.exceptions.ItemNotFoundException;
 import com.example.repository.ChannelRepository;
+import com.example.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ChannelService {
@@ -78,5 +81,21 @@ public class ChannelService {
         });
 
         return new PageImpl<>(channelDTOList, pageable, channelEntityPage.getTotalElements());
+    }
+
+    public ChannelEntity getChannelById(String channelId){
+        return channelRepository.findById(UUID.fromString(channelId)).orElseThrow(() ->{
+            return new ItemNotFoundException("Channel with this id not found");
+        });
+    }
+
+    public String changeChannelBanner(ChannelDTO channelDTO, String channelId) {
+        int changeBanner = channelRepository.updateChannelBanner(channelDTO.getBanner(), channelId);
+
+        if(changeBanner == 0){
+            throw new RuntimeException("Could not change channel Banner");
+        }
+
+        return "Updated";
     }
 }

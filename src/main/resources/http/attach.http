@@ -1,20 +1,20 @@
-### sssss ni orniga bitta rasm yuklap yuborila
 ### upload file
+### sssss ni orniga bitta rasm yuklap yuborila
 POST http://localhost:8080/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="SSSSSSSSSSSSS"
+Content-Disposition: form-data; name="file"; filename="Capture.PNG"
 
-< C:\Users\user\Pictures\ssssss.jpg
+< C:\Users\llaab\OneDrive\Desktop\WIUT\Capture.PNG
 
 ### Get File
 ### uuid orniga databasedan uuid olip copy paste qilish kerak
-GET http://localhost:8080/attach/load/4b397841-e976-4484-8378-6296f5651e9b
+GET http://localhost:8080/attach/load/35e85ac8-b8b7-488d-9a72-6db5a5534952
 
 ### Get General
 ### uuid orniga databasedan uuid olip copy paste qilish kerak
-GET http://localhost:8080/attach/open/4b397841-e976-4484-8378-6296f5651e9b
+GET http://localhost:8080/attach/open/35e85ac8-b8b7-488d-9a72-6db5a5534952
 
 ### Download By id with origin name
 ### uuid orniga databasedan uuid olip copy paste qilish kerak

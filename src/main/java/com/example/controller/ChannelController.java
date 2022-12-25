@@ -6,6 +6,7 @@ import com.example.dto.ChannelDTO;
 import com.example.entity.ChannelEntity;
 import com.example.service.ChannelService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -38,17 +39,37 @@ public class ChannelController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_OWNER')")
-    @PutMapping("/update/photo")
-    public ResponseEntity<?> changeChannelPhoto(@PathVariable String channelId, @RequestParam AttachDTO attachDTO){
+    @PutMapping("/update/photo/{id}")
+    public ResponseEntity<?> changeChannelPhoto(@PathVariable("id") String channelId, @RequestParam AttachDTO attachDTO){
         String response = channelService.updateChannelPhoto(channelId, attachDTO);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_OWNER')")
+    @PutMapping("/update/banner/{id}")
+    public ResponseEntity<?> changeChannelBanner(@Valid @RequestBody ChannelDTO channelDTO, @PathVariable("id") String channelId){
+        String response = channelService.changeChannelBanner(channelDTO, channelId);
 
         return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/pagination")
-    public ResponseEntity<?> channelListPagination(HttpServletRequest request, @RequestParam Integer page, @RequestParam Integer size){
+    public ResponseEntity<?> channelListPagination(@RequestParam Integer page, @RequestParam Integer size){
         Page<ChannelDTO> channelEntityPage = channelService.channelListPagination(page, size);
         return ResponseEntity.ok(channelEntityPage);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getChannelById(@PathVariable("id") String channelId){
+        return ResponseEntity.ok(channelService.getChannelById(channelId));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_OWNER', 'ROLE_OWNER')")
+    @PutMapping("/update/status/{id}")
+    public ResponseEntity<?> changeChannelStatus(){
+
+    }
+
 }

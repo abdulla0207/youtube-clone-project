@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/category/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/init/**").permitAll()
+                .requestMatchers("/attach/**").permitAll()
                 .requestMatchers("/init/**").permitAll()
                 .requestMatchers("/profile/filter/**").permitAll()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
