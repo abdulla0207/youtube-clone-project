@@ -20,6 +20,10 @@ public class TagService {
         TagEntity entity = new TagEntity();
         entity.setName(dto.getName());
 
+
+
+
+
         tagRepository.save(entity);
         ////set security for admin id
         entity.setId(dto.getId());
